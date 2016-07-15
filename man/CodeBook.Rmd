@@ -1,0 +1,258 @@
+---
+title: "CodeBook"
+author: "Courserian Djambar"
+date: "14 juillet 2016"
+abstract: |
+   This code book describes the variables, the data, and  transformations  performed to clean up the data that serve to practice some cleaning using R with the datasets provided by Coursera for the purpose of an assignment on this topic. In this markdown file, I comment the R code and respond to the questions of the assignement following the steps announced in the table on contents.
+
+output: 
+  html_document:
+    toc: TRUE
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## The experiment
+The dataset comes from the public data of the experiment called _"Human Activity Recognition Using Smartphones"_" and which goal is to recognize Human Activity from the recordings of 30 subjects performing activities of daily living  while carrying a waist-mounted smartphone with embedded inertial sensors (Reyes-Ortiz and al, 2012). The image above shows the measuring for the recognition of  six activities (laying, sitting, standing, walking, walking downstairs, and walking upstairs, see this [video](https://youtu.be/XOEN9W05_4A) from _Smarlab_ for more details).
+
+```{r fig.width=10, fig.height=2,echo=FALSE,fig.align='left' }
+library(png)
+library(grid)
+img <- readPNG("~/R/Assignment_Cleaning_Project/man/activities.png")
+grid.raster(img)
+```
+
+
+
+## Description of the data
+
+
+
+Thanks to the descriptions provided at the [Machine Learning Repository website](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones) and also in the **README.txt**, **feature_infos.txt** of the Coursera documentation, we can figure out the meaning of the data. So before diving into any cleaning, let us explain the signification of the rows and columns of the data we want to build. 
+
+### Description of the variables
+The lines of our target data refer to the participants (30 volunteers).
+Note that with a _non tidy_ data,  we can have more than one line for one subject.
+And our goal will be to create a _tidy_ dataset, we will see what a tidy dataset is, and how to create one in the next sections.
+
+### Description of the features
+
+```{r fig.width=3, fig.height=2,echo=FALSE, fig.align='left'}
+library(png)
+library(grid)
+img <- readPNG("~/R/Assignment_Cleaning_Project/man/nerd.png")
+grid.raster(img)
+```
+The explanations provided in the **feature_infos.txt** seem quite challenging and one could think that a thourough knowledge in physics is necessary. 
+But we won't need this proficiency, nor to master the SVM (Support Vector Machine) techniques used by the authors for the machine learning algorithm. It is sufficient to know that these are spatial measures (3-axial signals) of the activities and read calmly the explanations given for the features.
+
+Hence, we recall some important exerpts of the description given in the **README.txt**.
+
+The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ. These time domain signals (prefix 't' to denote time) were captured at a constant rate of 50 Hz. Then they were filtered using a median filter and a 3rd order low pass Butterworth filter with a corner frequency of 20 Hz to remove noise. Similarly, the acceleration signal was then separated into body and gravity acceleration signals (tBodyAcc-XYZ and tGravityAcc-XYZ) using another low pass Butterworth filter with a corner frequency of 0.3 Hz. 
+
+Subsequently, the body linear acceleration and angular velocity were derived in time to obtain Jerk signals (tBodyAccJerk-XYZ and tBodyGyroJerk-XYZ). Also the magnitude of these three-dimensional signals were calculated using the Euclidean norm (tBodyAccMag, tGravityAccMag, tBodyAccJerkMag, tBodyGyroMag, tBodyGyroJerkMag). 
+
+Finally a Fast Fourier Transform (FFT) was applied to some of these signals producing fBodyAcc-XYZ, fBodyAccJerk-XYZ, fBodyGyro-XYZ, fBodyAccJerkMag, fBodyGyroMag, fBodyGyroJerkMag. (Note the 'f' to indicate frequency domain signals). 
+
+These signals were used to estimate variables of the feature vector for each pattern:  
+'-XYZ' is used to denote 3-axial signals in the X, Y and Z directions.
+* Main signals : 
+    + tBodyAcc-XYZ
+    + tGravityAcc-XYZ
+    + tBodyAccJerk-XYZ
+    + tBodyGyro-XYZ
+    + tBodyGyroJerk-XYZ
+    + tBodyAccMag
+    + tGravityAccMag
+    + tBodyAccJerkMag
+    + tBodyGyroMag
+    + tBodyGyroJerkMag
+    + fBodyAcc-XYZ
+    + fBodyAccJerk-XYZ
+    + fBodyGyro-XYZ
+    + fBodyAccMag
+    + fBodyAccJerkMag
+    + fBodyGyroMag
+    + fBodyGyroJerkMag
+
+* We will only focus on two statistical measures :
+    + **mean()**: Mean value
+    + **std()**: Standard deviation
+
+## Structure of the zip file
+
+The package zip contains the following files:
+
+* From this zip, we will extract these specific files :
+    + 'README.txt'
+    + 'features_info.txt': Shows information about the variables used on the feature vector.
+    + 'features.txt': List of all features.
+    + 'activity_labels.txt': Links the class labels with their activity name.
+    + 'train/X_train.txt': Training set.
+    + 'train/y_train.txt': Training labels.
+    + 'test/X_test.txt': Test set.
+    + 'test/y_test.txt': Test labels.
+
+The other files can be discarded as they contain additionnal measures that we don't need.
+ 
+ After this first selection of the files of interest, we can process their loading into R.
+
+
+
+## Loading of the data
+
+The structure of the zip file provided in the Coursera lesson is quite disturbing as we must deal with a lot of folders in the unzipped file.
+But after analysing the goals of the study, only some files need to be imported.
+The R code below (...)
+
+We download the zip file in the data folder of the project (this download takes a while...) 
+```{r eval=TRUE, loading}
+  setwd("~/R/Assignment_Cleaning_Project")  ## project directory
+
+  if(!file.exists("./data")){
+    dir.create("./data")
+  } 
+
+  fileurl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
+  download.file(fileurl,destfile="./data/ucihardataset.zip",mode = "wb")
+
+  if (!file.exists("UCI HAR Dataset")) { 
+  unzip("./data/ucihardataset.zip", exdir="./data") 
+   }
+
+```
+
+Next, we read the training and the test sets, concatanate and merge them to create one data set. That's the first question of the assignement.
+
+## Responses to the questions of the assignment 
+### Q1. Merge the training and the test sets to create one data set.
+ 
+ 
+```{r merge, eval = TRUE}
+## Read the training and test data sets
+  trainlabels <- read.table("../data/UCI HAR Dataset/train/y_train.txt")
+  trainingset <- read.table("../data/UCI HAR Dataset/train/X_train.txt")
+  traininsubject <- read.table("../data/UCI HAR Dataset/train/subject_train.txt")
+
+  testlabels <- read.table("../data/UCI HAR Dataset/test/y_test.txt") ;
+  str(testlabels) # labels of the activities
+  testset <- read.table("../data/UCI HAR Dataset/test/X_test.txt") 
+  testsubject <- read.table("../data/UCI HAR Dataset/test/subject_test.txt") 
+
+## Combine horizontally the subjet, activity and feature sets
+  csubjects <-  rbind(traininsubject, testsubject)
+  clabels <- rbind(trainlabels, testlabels)
+  csets <- rbind(trainingset,  testset)
+  
+  names(csubjects) <- c("subject")
+  names(clabels) <-  c("activity")
+  features <- read.table("../data/UCI HAR Dataset/features.txt", header = FALSE)
+  names(csets)  <- features$V2   
+  
+## Combine vertically the training and test data sets
+  conso <-  cbind(csubjects, csets, clabels)
+  library(dplyr)
+  conso <-  tbl_df(conso)
+```
+
+  We have created on date set, named _conso_ from the training and test sets.
+
+
+### Q2. Extract only the measurements on the mean and standard deviation for each measurement.
+We consider the first and second moments, so we subset the statistics provided and retain only two of them.
+```{r eval=TRUE, stats}
+  basicstats <- grep(".*mean.*|.*std.*", as.character(features[,2]))
+  featureselected <-  as.character(features[basicstats, 2])
+  test <- identical(featureselected, unique(featureselected)) # verify no dupplicates
+  measures <-  subset(conso, select = c("subject", "activity", featureselected))
+```
+
+### Q3. Use descriptive activity names to name the activities in the dataset 
+This is quite straightforward, as we can use the codes provided in the _activitylabel_ text file to map the values.
+
+```{r eval = TRUE, message = FALSE, results = 'hide', labelling}
+  ActivityLabels <- read.table("../data/UCI HAR Dataset/activity_labels.txt", header = FALSE) 
+  as.factor(measures$activity)
+  measures$activity <- factor(measures$activity, levels = ActivityLabels[,1], labels = ActivityLabels[,2])
+```
+
+
+
+### Q4. Appropriately label the data set with descriptive variable name 
+ Measures of multiple signals are taken both from the time and frequency domains.
+ Prefix 't' denotes time  ; f denotes frequency.
+We tansform the variables to lowercase, as adviced in the [Google's R Style Guide](https://google.github.io/styleguide/Rguide.xml#identifiers).  But it's a question of taste, and one can prefer other conventions (see for instance [here](http://adv-r.had.co.nz/Style.html)).
+We also remove unnecessary characters using the regular expressions (see Week 4 of the course), and adopt the _period.separated convention_ to remain with comprensible short names (by the way, the short names indicated in the feature-info.txt are taken as a starting point). 
+  
+
+```{r cleaning, eval = TRUE}
+  names(measures) <- gsub("[-()]", "", names(measures))
+  names(measures) <- gsub("BodyBody", "body", names(measures)) # to remove duplicate nouns
+  names(measures) <- tolower(names(measures)) # as adviced by Hadley Wickham and Google's R Style Guide
+  names(measures) <- gsub("mean", ".mean.", names(measures))
+  names(measures) <- gsub("std", ".std.", names(measures))
+  names(measures) <- gsub("mean.$", "mean", names(measures))
+  names(measures) <- gsub("std.$", "std", names(measures))
+  names(measures) <- gsub("freqx$", "freq.x", names(measures))
+  names(measures) <- gsub("freqy$", "freq.y", names(measures))
+  names(measures) <- gsub("freqz$", "freq.z", names(measures))
+  names(measures) <- gsub("tbody", "tbody.", names(measures))
+  names(measures) <- gsub("fbody", "fbody.", names(measures))
+  names(measures) <- gsub("tgravity", "tgravity.", names(measures))
+  names(measures)
+```
+### Q5. Create an independant tidy dataset with the average of each variable for each activity and each subject.
+As explained [here](vignette http://127.0.0.1:10330/help/library/tidyr/doc/tidy-data.html) by Hadley Wickham
+a tidy data means that  
+ i) each variable forms a column,   
+ ii) each observation formas a row,    
+ iii) each table stores data about one kind of observation.      
+ see [this vignette](vignette http://127.0.0.1:10330/help/library/tidyr/doc/tidy-data.html) from Hadley Wickham.
+ Condition i) is violated in the data frame _measures_ because we have for instance more than one row for each 
+ subject (should the subject be the key).
+  
+With the package **dplyr**, we summarize the results by _subject_ **and** _activity_. 
+Hence, the key is now formed by the two variables _subject_ and _activity_.
+
+```{r tidy, eval= TRUE}
+  hardata <- measures %>% group_by(activity, subject) %>% summarise_each(funs(mean)) ## tidy dataset
+  dim(hardata)
+  View(hardata)
+  hardata # structure of the hardata
+```
+Our final output, the dataframe named _hardata_ contains 'r nrow(hardata)' rows and 'r ncol(hardata)' variables.
+
+## Misc
+
+The tidy dataset of the measures of the human activity data can now be written :
+```{r writehardata, eval = TRUE}
+  write.table(hardata, "../data/hardata.txt", row.names = FALSE, quote = FALSE)
+ save(hardata, file = "../data/hardata.Rda")
+```
+
+Nota :  the hardata can be read by typing the command
+```{r, eval= TRUE}
+tidy <- read.table("../data/hardata.txt", header = TRUE) 
+View( tidy ) 
+```
+
+   
+or just by loading the Rdata by typing
+
+```{r, eval = TRUE}
+load("../data/hardata.Rda")
+```
+
+Finally, we can create a documentation (a markdown file) for the variables of the tidy dataset :
+```{r docu, eval = TRUE}
+  prompt(hardata) # quick way to create a  template tof the documentation of a dataset 
+```
+We can then edit it and complete the descriptions (to write a package for instance). The  documentation can be found in the _man_ directory (see this  [link](hardata.Rd)).
+
+## Conclusion
+The tidy format is a very powerfull concept an a pre requisite step in any machine learning implementation.
+Through all these questions, we have followed a methodology that can be useful to clean and construct tidy datasets. To accomplish a cleaning, one must master the regular expressions of R, know the existing packages of R dedicated for this task (_dplyr_,..) and most of all have a deep understanding of the meaning of the variables in order to reduce ,if possible, the number of features and start the analysis with a tidy dataset. 
+To extend this approach further, some datascientist are even thinking about generating tidy ouputs too (see the [broom package](https://cran.r-project.org/web/packages/broom/broom.pdf)), to pipe the models more easily!
