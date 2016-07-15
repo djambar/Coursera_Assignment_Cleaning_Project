@@ -1,0 +1,29 @@
+---
+title: "README"
+author: "Djambar"
+date: "15 juillet 2016"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Structure of the Git repository
+
+* Git repo :
+    + name of the project : 'Assignment_Cleaning_Project'
+    + File at the root level
+        - **README.html** and README.Rmd
+    + Folders :
+        - **R** : contains the file 'run_analysis.r'
+        - **man** : contains the _CodeBook_ html and .Rmd file, some images, and the  documentation for the variables of the final tidy dataset. The _CodeBook_ will guide you trhough all the process. 
+        - **data** : contains the tidy dataset named _hardata_ in .txt and .RData formats
+   
+  
+## Session info
+
+```{r info}
+sessionInfo()
+```
