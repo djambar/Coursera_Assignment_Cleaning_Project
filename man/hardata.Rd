@@ -31,29 +31,29 @@
     \item{\code{tbody.accjerk.std.x}}{standard deviation of the jerk of the acceleration of the body, in the time domain and the x-axis}
     \item{\code{tbody.accjerk.std.y}}{standard deviation of the jerk of the acceleration of the body, in the time domain and the y-axis}
     \item{\code{tbody.accjerk.std.z}}{standard deviation of the jerk of the acceleration of the body, in the time domain and the z-axis}
-    \item{\code{tbody.gyro.mean.x}}{a numeric vector}
-    \item{\code{tbody.gyro.mean.y}}{a numeric vector}
-    \item{\code{tbody.gyro.mean.z}}{a numeric vector}
-    \item{\code{tbody.gyro.std.x}}{a numeric vector}
-    \item{\code{tbody.gyro.std.y}}{a numeric vector}
-    \item{\code{tbody.gyro.std.z}}{a numeric vector}
-    \item{\code{tbody.gyrojerk.mean.x}}{a numeric vector}
-    \item{\code{tbody.gyrojerk.mean.y}}{a numeric vector}
-    \item{\code{tbody.gyrojerk.mean.z}}{a numeric vector}
-    \item{\code{tbody.gyrojerk.std.x}}{a numeric vector}
-    \item{\code{tbody.gyrojerk.std.y}}{a numeric vector}
-    \item{\code{tbody.gyrojerk.std.z}}{a numeric vector}
-    \item{\code{tbody.accmag.mean}}{a numeric vector}
-    \item{\code{tbody.accmag.std}}{a numeric vector}
-    \item{\code{tgravity.accmag.mean}}{a numeric vector}
-    \item{\code{tgravity.accmag.std}}{a numeric vector}
-    \item{\code{tbody.accjerkmag.mean}}{a numeric vector}
-    \item{\code{tbody.accjerkmag.std}}{a numeric vector}
-    \item{\code{tbody.gyromag.mean}}{a numeric vector}
-    \item{\code{tbody.gyromag.std}}{a numeric vector}
-    \item{\code{tbody.gyrojerkmag.mean}}{a numeric vector}
-    \item{\code{tbody.gyrojerkmag.std}}{a numeric vector}
-    \item{\code{fbody.acc.mean.x}}{same description as above, but in the frequency domain}
+    \item{\code{tbody.gyro.mean.x}}{mean of the gyroscopic signal of the body component, on the x-axis and the time domain}
+    \item{\code{tbody.gyro.mean.y}}{mean of the gyroscopic signal of the body component, on the y-axis and the time domain}
+    \item{\code{tbody.gyro.mean.z}}{mean of the gyroscopic signal of the body component, on the z-axis and the time domain}
+    \item{\code{tbody.gyro.std.x}}{standard deviation of the gyroscopic signal of the body component, on the x-axis and the time domain}
+    \item{\code{tbody.gyro.std.y}}{standard deviation of the gyroscopic signal of the body component, on the y-axis and the time domain}
+    \item{\code{tbody.gyro.std.z}}{standard deviation of the gyroscopic signal of the body component, on the z-axis and the time domain}
+    \item{\code{tbody.gyrojerk.mean.x}}{mean of the jerk of the gyroscopic component of the body aceleration on the x-axis and time domain}
+    \item{\code{tbody.gyrojerk.mean.y}}{mean of the jerk of the gyroscopic component of the body aceleration on the y-axis and time domain}
+    \item{\code{tbody.gyrojerk.mean.z}}{mean of the jerk of the gyroscopic component of the body aceleration on the z-axis and time domain}
+    \item{\code{tbody.gyrojerk.std.x}}{standard deviation of the jerk of the gyroscopic component of the body aceleration on the x-axis and time domain}
+    \item{\code{tbody.gyrojerk.std.y}}{standard deviation of the jerk of the gyroscopic component of the body aceleration on the y-axis and time domain}
+    \item{\code{tbody.gyrojerk.std.z}}{standard deviation of the jerk of the gyroscopic component of the body aceleration on the z-axis and time domain}
+    \item{\code{tbody.accmag.mean}}{mean magnitude of the acceleration of the body component, in the time domain}
+    \item{\code{tbody.accmag.std}}{standard deviation of the magnitude of the acceleration of the body component, in the time domain}
+    \item{\code{tgravity.accmag.mean}}{mean magnitude of the gravity acceleration, in the time domain}
+    \item{\code{tgravity.accmag.std}}{standard deviation of the magnitude of the gravity acceleration, in the time domain}
+    \item{\code{tbody.accjerkmag.mean}}{mean magnitude of the jerk of the body acceleration, in the time domain}
+    \item{\code{tbody.accjerkmag.std}}{standard deviation of the magnitude of the jerk of the body acceleration, in the time domain}
+    \item{\code{tbody.gyromag.mean}}{mean magnitude of the gyroscope signal in the time domain}
+    \item{\code{tbody.gyromag.std}}{standard deviation of the magnitude of the gyroscope signal in the time domain}
+    \item{\code{tbody.gyrojerkmag.mean}}{mean magnitude of the jerk of the gyroscope signal for the body component, in the time domain}
+    \item{\code{tbody.gyrojerkmag.std}}{standard deviation of the  magnitude of the jerk of the gyroscope signal for the body component, in the time domain}
+    \item{\code{fbody.acc.mean.x}}{from this variable to the last, we have the same description as above, but in the frequency domain (with prefixes f instead on t)}
     \item{\code{fbody.acc.mean.y}}{a numeric vector}
     \item{\code{fbody.acc.mean.z}}{a numeric vector}
     \item{\code{fbody.acc.std.x}}{a numeric vector}
@@ -95,7 +95,7 @@
   }
 }
 \details{
-%%  ~~ If necessary, more details than the __description__ above ~~
+For more information about this dataset contact: activityrecognition@smartlab.ws
 }
 
 \source{
