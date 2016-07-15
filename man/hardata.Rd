@@ -9,28 +9,28 @@
 }
 \usage{data("hardata")}
 \format{
-  A data frame with 180 observations on the following 81 variables.
+  A data frame with 180 observations on the following 81 variables. All the variables are numeric, except the activity (factor).From the third variable to the last, we have tri-axial measures  of signals. 
   \describe{
     \item{\code{activity}}{a factor with levels \code{WALKING} \code{WALKING_UPSTAIRS} \code{WALKING_DOWNSTAIRS} \code{SITTING} \code{STANDING} \code{LAYING}}
-    \item{\code{subject}}{a numeric vector}
-    \item{\code{tbody.acc.mean.x}}{a numeric vector}
-    \item{\code{tbody.acc.mean.y}}{a numeric vector}
-    \item{\code{tbody.acc.mean.z}}{a numeric vector}
-    \item{\code{tbody.acc.std.x}}{a numeric vector}
-    \item{\code{tbody.acc.std.y}}{a numeric vector}
-    \item{\code{tbody.acc.std.z}}{a numeric vector}
-    \item{\code{tgravity.acc.mean.x}}{a numeric vector}
-    \item{\code{tgravity.acc.mean.y}}{a numeric vector}
-    \item{\code{tgravity.acc.mean.z}}{a numeric vector}
-    \item{\code{tgravity.acc.std.x}}{a numeric vector}
-    \item{\code{tgravity.acc.std.y}}{a numeric vector}
-    \item{\code{tgravity.acc.std.z}}{a numeric vector}
-    \item{\code{tbody.accjerk.mean.x}}{a numeric vector}
-    \item{\code{tbody.accjerk.mean.y}}{a numeric vector}
-    \item{\code{tbody.accjerk.mean.z}}{a numeric vector}
-    \item{\code{tbody.accjerk.std.x}}{a numeric vector}
-    \item{\code{tbody.accjerk.std.y}}{a numeric vector}
-    \item{\code{tbody.accjerk.std.z}}{a numeric vector}
+    \item{\code{subject}}{the Id of the participant}
+    \item{\code{tbody.acc.mean.x}}{mean of the body acceleration, in time domain, on the x-axis}
+    \item{\code{tbody.acc.mean.y}}{mean of the body acceleration, in time domain, on the y-axis}
+    \item{\code{tbody.acc.mean.z}}{mean of the body acceleration, in time domain, on the y-axis}
+    \item{\code{tbody.acc.std.x}}{standard deviation of the body acceleration, in time domain, on the x-axis}
+    \item{\code{tbody.acc.std.y}}{standard deviation of the body acceleration, in time domain, on the y-axis}
+    \item{\code{tbody.acc.std.z}}{standard deviation of the body acceleration, in time domain, on the z-axis}
+    \item{\code{tgravity.acc.mean.x}}{mean of the gravitationnal component of the acceleration on the x-axis and time domain}
+    \item{\code{tgravity.acc.mean.y}}{mean of the gravitationnal component of the acceleration on the y-axis and time domain}
+    \item{\code{tgravity.acc.mean.z}}{mean of the gravitationnal component of the acceleration on the z-axis and time domain}
+    \item{\code{tgravity.acc.std.x}}{standard deviation of the gravitationnal component of the acceleration on the x-axis and time domain}
+    \item{\code{tgravity.acc.std.y}}{standard deviation of the gravitationnal component of the acceleration on the y-axis and time domain}
+    \item{\code{tgravity.acc.std.z}}{tgravity.acc.std.y}}{standard deviation of the gravitationnal component of the acceleration on the z-axis and time domain}
+    \item{\code{tbody.accjerk.mean.x}}{mean jerk of the acceleration of the body, in the time domain and the x-axis}
+    \item{\code{tbody.accjerk.mean.y}}{mean jerk of the acceleration of the body, in the time domain and the y-axis}
+    \item{\code{tbody.accjerk.mean.z}}{mean jerk of the acceleration of the body, in the time domain and the z-axis}
+    \item{\code{tbody.accjerk.std.x}}{standard deviation of the jerk of the acceleration of the body, in the time domain and the x-axis}
+    \item{\code{tbody.accjerk.std.y}}{standard deviation of the jerk of the acceleration of the body, in the time domain and the y-axis}
+    \item{\code{tbody.accjerk.std.z}}{standard deviation of the jerk of the acceleration of the body, in the time domain and the z-axis}
     \item{\code{tbody.gyro.mean.x}}{a numeric vector}
     \item{\code{tbody.gyro.mean.y}}{a numeric vector}
     \item{\code{tbody.gyro.mean.z}}{a numeric vector}
@@ -53,7 +53,7 @@
     \item{\code{tbody.gyromag.std}}{a numeric vector}
     \item{\code{tbody.gyrojerkmag.mean}}{a numeric vector}
     \item{\code{tbody.gyrojerkmag.std}}{a numeric vector}
-    \item{\code{fbody.acc.mean.x}}{a numeric vector}
+    \item{\code{fbody.acc.mean.x}}{same description as above, but in the frequency domain}
     \item{\code{fbody.acc.mean.y}}{a numeric vector}
     \item{\code{fbody.acc.mean.z}}{a numeric vector}
     \item{\code{fbody.acc.std.x}}{a numeric vector}
@@ -97,11 +97,11 @@
 \details{
 %%  ~~ If necessary, more details than the __description__ above ~~
 }
+
 \source{
-%%  ~~ reference to a publication or URL from which the data were obtained ~~
 }
-\references{
-%%  ~~ possibly secondary sources and usages ~~
+\references{UCI Machine Learining Repository
+\url{http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones}
 }
 \examples{
 data(hardata)
