@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 * Git repo :
     + name of the project : 'Assignment_Cleaning_Project'
     + File at the root level
-        - **README.html** and README.Rmd
+        - **README.html** (right clik and ve=eiw it in a web browser), and a **README.Rmd** file
     + Folders :
         - **R** : contains the file 'run_analysis.r'
         - **man** : contains the _CodeBook_ html and .Rmd file, some images, and the  documentation for the variables of the final tidy dataset. 
